@@ -105,6 +105,7 @@ ENV/
 
 # Setuptools distribution folder
 /dist/
+/build/
 
 # Python egg emtadata, regenerated from source files by setuptools
 /*.egg-info

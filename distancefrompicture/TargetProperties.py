@@ -1,6 +1,6 @@
 import warnings
 
-class TargetProperties():
+class TargetProperties(object):
     def __init__(self, name: str, target_width: float) -> None:
         self.name = name
         self.target_width = target_width

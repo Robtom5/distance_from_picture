@@ -1,11 +1,14 @@
 import warnings
 import numpy as np
 
+
 class CameraProperties(object):
-    def __init__(self, cam_fov: tuple, cam_res: tuple, name: str = 'default camera') -> None:
+    def __init__(self, cam_fov: tuple, cam_res: tuple, name: str = 'default'):
         self.name = name
-        self.camera_fov = cam_fov # tuple of (theta_x, theta_y) in degrees
-        self.camera_res = cam_res # tuple of (width, height) in pixels
+        # tuple of (theta_x, theta_y) in degrees
+        self.camera_fov = cam_fov
+        # tuple of (width, height) in pixels
+        self.camera_res = cam_res
 
     @property
     def name(self) -> str:
@@ -42,11 +45,20 @@ class CameraProperties(object):
 
     @property
     def focal_distance(self):
-        x_d = (self.camera_res[0]/2) / (np.tan(np.deg2rad(self.camera_fov[0]/2)))
-        y_d = (self.camera_res[1]/2) / (np.tan(np.deg2rad(self.camera_fov[1]/2)))
+        x_d = (self.camera_res[0]/2)\
+            / (np.tan(np.deg2rad(self.camera_fov[0]/2)))
+        y_d = (self.camera_res[1]/2)\
+            / (np.tan(np.deg2rad(self.camera_fov[1]/2)))
         return ((x_d + y_d) / 2)
+
+    def convert_point(self, point):
+        return (
+            point[0] - (self.camera_res[0]/2),
+            -1*(point[1] - (self.camera_res[1]/2))
+            )
 
     @staticmethod
     def _already_set(attribute: str):
-        warnings.warn('property {} already set'.format(attribute), SyntaxWarning, stacklevel = 3)
-
+        warnings.warn(
+            'property {} already set'.format(attribute),
+            SyntaxWarning, stacklevel=3)

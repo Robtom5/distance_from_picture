@@ -1,5 +1,6 @@
 import warnings
 
+
 class TargetProperties(object):
     def __init__(self, name: str, target_width: float) -> None:
         self.name = name
@@ -29,5 +30,6 @@ class TargetProperties(object):
 
     @staticmethod
     def _already_set(attribute: str):
-        warnings.warn('property {} already set'.format(attribute), SyntaxWarning, stacklevel = 3)
-
+        warnings.warn(
+            'property {} already set'.format(attribute),
+            SyntaxWarning, stacklevel=3)
